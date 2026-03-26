@@ -1,12 +1,5 @@
-#include <stdio.h>
+#include "../include/matrix.h"
 #include <stdlib.h>
-
-struct matrix
-{
-    int rows;    // m
-    int columns; // n
-    float **data;
-};
 
 struct matrix *getMatrix(int m, int n)
 {
@@ -20,6 +13,19 @@ struct matrix *getMatrix(int m, int n)
     }
     (*M).data = matrix;
     return M;
+}
+
+struct matrix *copyMatrix(struct matrix *M)
+{
+    struct matrix *CP = getMatrix((*M).rows, (*M).columns);
+    for (int i = 0; i < (*M).rows; i++)
+    {
+        for (int j = 0; j < (*M).columns; j++)
+        {
+            (*CP).data[i][j] = (*M).data[i][j];
+        }
+    }
+    return CP;
 }
 
 void freeMatrix(struct matrix *M)
