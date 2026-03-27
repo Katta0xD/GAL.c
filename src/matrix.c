@@ -1,7 +1,7 @@
 #include "../include/matrix.h"
 #include <stdlib.h>
 
-struct matrix *getMatrix(int m, int n)
+struct matrix *newMatrix(int m, int n)
 {
     struct matrix *M = malloc(sizeof(struct matrix));
     (*M).rows = m;    // or M->rows = m;
@@ -17,7 +17,7 @@ struct matrix *getMatrix(int m, int n)
 
 struct matrix *copyMatrix(struct matrix *M)
 {
-    struct matrix *CP = getMatrix((*M).rows, (*M).columns);
+    struct matrix *CP = newMatrix((*M).rows, (*M).columns);
     for (int i = 0; i < (*M).rows; i++)
     {
         for (int j = 0; j < (*M).columns; j++)
@@ -42,8 +42,9 @@ void freeMatrix(struct matrix *M)
 }
 
 void loadMatrix(struct matrix *M,
-                float *coefficients) // coefficients array should be sorted By row, it means: ((1,1), (1,2), ..., (1,
-                                     // n), (2, 1), (2,2), ..., (2, n), ..., (m, 1), (m, 2), ..., (m, n)
+                float *coefficients) // coefficients array should be sorted By row, it
+                                     // means: ((1,1), (1,2), ..., (1, n), (2, 1), (2,2),
+                                     // ..., (2, n), ..., (m, 1), (m, 2), ..., (m, n)
 {
     for (int i = 0; i < (*M).rows; i++)
     {
@@ -95,7 +96,8 @@ void scaleRow(struct matrix *M, int row, float constant)
 }
 
 void addScaledRow(struct matrix *M, int destRow, int srcRow,
-                  float constant) // adds to destRow the result of multiplying srcRow * constant
+                  float constant) // adds to destRow the result of multiplying
+                                  // srcRow * constant
 {
     for (int i = 0; i < (*M).columns; i++)
     {

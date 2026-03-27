@@ -9,7 +9,7 @@ struct matrix
     float **data;
 };
 
-struct matrix *getMatrix(int m, int n);
+struct matrix *newMatrix(int m, int n);
 
 struct matrix *copyMatrix(struct matrix *M);
 
