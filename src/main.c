@@ -30,7 +30,7 @@ void printMatrix(struct matrix *M)
     for (int i = 0; i < M->rows; i++)
     {
         for (int j = 0; j < M->columns; j++)
-            printf("[%g]", getCoefficient(M, i, j));
+            printf("[%f]", getCoefficient(M, i, j));
         printf("\n");
     }
 }
@@ -43,7 +43,11 @@ int main()
     struct matrix *REF = getRowEchelonForm(M);
     printMatrix(REF);
 
+    struct matrix *RREF = getReducedRowEchelonForm(M);
+    printMatrix(RREF);
+
     freeMatrix(M);
     freeMatrix(REF);
+    freeMatrix(RREF);
     return 0;
 }

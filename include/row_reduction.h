@@ -4,4 +4,4 @@
 
 struct matrix *getRowEchelonForm(struct matrix *M);
 
-struct matrix getReducedRowEchelonForm(struct matrix *M);
+struct matrix *getReducedRowEchelonForm(struct matrix *M);

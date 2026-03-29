@@ -1,5 +1,6 @@
 #include "../include/matrix.h"
 #include <assert.h>
+#include <stdio.h>
 
 // corregir inicio del bucle interior; considerar division por 0; enviar filas nulas al final usando swapRows();
 struct matrix *getRowEchelonForm(struct matrix *M)
@@ -33,5 +34,20 @@ struct matrix *getRowEchelonForm(struct matrix *M)
 struct matrix *getReducedRowEchelonForm(struct matrix *M)
 {
     struct matrix *RREF = getRowEchelonForm(M);
+    for (int i = RREF->rows - 1; i >= 0; i--)
+    {
+        int j = 0;
+        while (RREF->data[i][j] == 0 && j < RREF->columns) // Search for the pivot
+            j++;
+        if (j < RREF->columns) // convert pivot to 1 if found
+            scaleRow(RREF, i, 1 / RREF->data[i][j]);
+        else
+            continue;
+        for (int exp = i - 1; exp >= 0; exp--) // if pivot found, clear the coefficients above it
+        {
+            printf("data[%d][%d] = %f", exp, j, RREF->data[exp][j]);
+            addScaledRow(RREF, exp, j, (-1) * RREF->data[exp][j]);
+        }
+    }
     return RREF;
 }
