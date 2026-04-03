@@ -1,14 +1,23 @@
+#include "../external/libfort/fort.h"
 #include "../include/matrix.h"
 #include "../include/row_reduction.h"
+#include <stddef.h>
 #include <stdio.h>
 
 struct matrix *createMatrixAskingInput()
 {
     int m, n;
+    char x;
+    bool extended = false;
+    printf("Creacion de la matriz");
+    printf("Es una matriz extendida [y/N]: ");
+    scanf("%c", &x);
+    if (x == 'Y' || x == 'y')
+        extended = false;
     printf("Ingrese las dimesiones de su matriz (m * n): ");
     scanf("%d %d", &m, &n);
 
-    struct matrix *M = newMatrix(m, n);
+    struct matrix *M = newMatrix(m, n, extended);
 
     for (int i = 0; i < M->rows; i++)
     {
@@ -20,17 +29,19 @@ struct matrix *createMatrixAskingInput()
             setCoefficient(M, i, j, input);
         }
     }
-
     return M;
 }
 
 void printMatrix(struct matrix *M)
 {
+    ft_table_t *table = ft_create_table();
+    // ft_set_cell_prop(table, M->rows, M->columns, )
+
     printf("\n");
     for (int i = 0; i < M->rows; i++)
     {
         for (int j = 0; j < M->columns; j++)
-            printf("[%f]", getCoefficient(M, i, j));
+            printf("%f", getCoefficient(M, i, j));
         printf("\n");
     }
 }
